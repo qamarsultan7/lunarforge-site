@@ -1,12 +1,22 @@
-# LunarForge
+# ShieldBrain by LunarForge
 
-A responsive, static company website for LunarForge, featuring ShieldBrain.
+Static responsive product website. Deployable files live in dist/; no build is required. Uses a styled text wordmark and actual supplied app screenshots. Local hosting metadata, original image exports, and unused logo assets are excluded from Git.
 
-The deployable website is in `dist/`. No build or package installation is required. Serve that directory with any static web server, or open `dist/index.html` directly to preview it.
+## Preview and validate
 
-- `dist/index.html`: page content and links
-- `dist/styles.css`: responsive styling and geometric brand illustration
-- `dist/script.js`: mobile navigation and the clearly labeled local counter demo
-- `.openai/hosting.json`: Sites identity and static hosting directory
+Run `python -m http.server 8000 --directory dist` and open http://localhost:8000.
 
-ShieldBrain descriptions are based on the owner's supplied copy. The counter is an illustrative interaction and does not access or track any real app activity. Google Fonts provides optional fonts, with system fallbacks. There are no analytics, forms, or app integrations.
+Run `node --check dist/script.js` and `python scripts/check_site.py` for the same checks used by CI.
+
+## Publish with GitHub Actions
+
+1. Create a GitHub repository and connect this checkout if needed: `git remote add origin https://github.com/OWNER/REPOSITORY.git`.
+2. In repository **Settings > Pages > Build and deployment**, select **GitHub Actions**.
+3. Commit and push the website, including dist/assets/, scripts/, and .github/workflows/deploy-pages.yml, to main or master.
+4. Open **Actions > Deploy website to GitHub Pages**. Successful deployment provides the live URL in the github-pages environment. **Run workflow** supports manual deployment too.
+
+Pull requests validate JavaScript and local assets/anchors without deploying. Pushes to main or master validate and deploy dist/. No personal access token is needed. Use one production branch to avoid competing deployments. Pages availability depends on repository visibility and GitHub plan.
+
+Relative asset paths support project repositories at https://OWNER.github.io/REPOSITORY/. Configure a custom domain in Pages settings if desired. No domain is assumed here.
+
+This checkout has no Git remote; live deployment requires connecting the repository and pushing changes. Optional Google Fonts have system fallbacks. App links use the existing ShieldBrain page rather than an unverified download URL.

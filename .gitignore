@@ -1,5 +1,32 @@
+﻿# Dependencies and local tooling
 node_modules/
+.sites.local/
+/.openai/
+/.codex/
+/.agents/
+/.aws/
+.vscode/
+.idea/
+
+# Original image exports and unused logo assets
+/1.png
+/2.png
+/3.png
+/playstore.png
+/dist/assets/shieldbrain-icon.png
+/dist/favicon.svg
+
+# Credentials and local configuration
+.env
+.env.*
+!.env.example
+
+# Generated files and system clutter
 *.tar.gz
 *.tgz
+*.log
+__pycache__/
+*.py[cod]
 .DS_Store
-.sites.local/
+Thumbs.db
+Desktop.ini

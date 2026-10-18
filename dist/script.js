@@ -19,22 +19,14 @@ document.addEventListener('keydown', event => {
 document.addEventListener('click', event => {
   if (!event.target.closest('.site-header')) closeMenu();
 });
-const demoButton = document.querySelector('#demo-next');
-const countLabel = document.querySelector('#reel-count');
-const counterStatus = document.querySelector('#counter-status');
-const counterView = document.querySelector('#counter-view');
-const limitView = document.querySelector('#limit-view');
-const ring = document.querySelector('.counter-ring');
-let count = 18;
-demoButton.addEventListener('click', () => {
-  count = count >= 20 ? 18 : count + 1;
-  const reachedLimit = count >= 20;
-  countLabel.textContent = String(count);
-  ring.style.background = `conic-gradient(#5e7055 0deg ${count / 20 * 360}deg, #e3e7dc ${count / 20 * 360}deg)`;
-  counterView.hidden = reachedLimit;
-  limitView.hidden = !reachedLimit;
-  demoButton.innerHTML = reachedLimit ? 'Try the demo again <span aria-hidden="true">↺</span>' : 'Try it: count a video <span aria-hidden="true">+</span>';
-  demoButton.setAttribute('aria-label', reachedLimit ? '20-video limit reached. Reset the demo.' : `Count another video. ${count} of 20 videos watched.`);
-  counterStatus.textContent = `${20 - count} ${count === 19 ? 'video' : 'videos'} left. Make them count.`;
+const galleryButtons = [...document.querySelectorAll('.gallery-button')];
+const galleryPanels = [...document.querySelectorAll('.screenshot-panel')];
+galleryButtons.forEach((button, index) => {
+  button.addEventListener('click', () => {
+    galleryButtons.forEach(item => item.setAttribute('aria-pressed', String(item === button)));
+    galleryPanels.forEach(panel => { panel.hidden = panel.id !== button.getAttribute('aria-controls'); });
+    document.querySelector('#gallery-count').textContent = `0${index + 1} / 03`;
+    document.querySelector('#gallery-status').textContent = `Screenshot ${index + 1} of 3: ${button.textContent.trim().replace(/^\d+\s*/, '')}`;
+  });
 });
 document.querySelector('#year').textContent = String(new Date().getFullYear());
